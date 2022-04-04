@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/tiktok%20Ui/main_page.dart';
 import 'package:flutter_example/whatsapp_ui/whatsapp_main_page.dart';
 
 void main() {
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: WhatsappMainPage(),
+   //   home: WhatsappMainPage(),
+   home: MainPage(),
     );
   }
 }
