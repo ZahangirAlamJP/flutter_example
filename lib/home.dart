@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
 TextEditingController BilText = TextEditingController();
 
 double price = 0.0;
-// Current Bill Calculator
+//Current Bill BILL CALCULATOR
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +32,17 @@ double price = 0.0;
               TextField(
                 keyboardType: TextInputType.number,
                 controller: BilText,
-                onSubmitted: (v) {
+                onChanged: (v) {
                   setState(() {
-                    price= double.parse(BilText.text);
+                    price = double.parse(BilText.text);
                   });
-                  print(BilText.text);
                 },
+              
+        //     onSubmitted: (v) {
+        //     setState(() {
+        //     price = double.parse(BilText.text);
+        //         });
+        //  },
                 decoration: InputDecoration(border: OutlineInputBorder(),
                 hintText: "Please Enter Bill",
                 labelText: "Please Enter Bill"),
