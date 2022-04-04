@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/whatsapp_ui/chat_page.dart';
 
 class WhatsappMainPage extends StatefulWidget {
   const WhatsappMainPage({ Key? key }) : super(key: key);
@@ -30,23 +31,30 @@ class _WhatsappMainPageState extends State<WhatsappMainPage> {
             indicatorColor: Colors.amber,
             tabs: [
             Tab(
-              text: "Camaera",
+             
               icon: Icon(Icons.camera),
             ),
             Tab(
               text: "Chat",
-              icon: Icon(Icons.camera),
+             
             ),
             Tab(
               text: "Status",
-              icon: Icon(Icons.camera),
+   
             ),
             Tab(
               text: "Calls",
-              icon: Icon(Icons.camera),
+       
             ),
           ]),
         ),
+        body: TabBarView(children: [
+          Text("CAMERA", style: TextStyle(fontSize: 30),),
+          ChatPage(),
+          //Text("CHATS", style: TextStyle(fontSize: 30),),
+          Text("STATUS", style: TextStyle(fontSize: 30),),
+          Text("CALLS", style: TextStyle(fontSize: 30),),
+        ]),
       ),
     );
   }
