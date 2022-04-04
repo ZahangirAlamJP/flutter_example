@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/whatsapp_ui/chat_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({ Key? key }) : super(key: key);
@@ -15,9 +16,17 @@ class _MainPageState extends State<MainPage> {
       selectedIndex = index;
     });
   }
+  List<Widget> _pages = [
+    Center(child: Text("Page 1"),),
+    Center(child: Text("Page 2"),),
+    Center(child: Text("Page 3"),),
+    ChatPage(),
+    Center(child: Text("Page 5"),),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         unselectedItemColor: Colors.amber,
