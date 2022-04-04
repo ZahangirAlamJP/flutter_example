@@ -6,12 +6,15 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
+      floatingActionButton: FloatingActionButton(onPressed: (){},child: Icon(Icons.add),),
+      body: ListView(children: [
+        ...List.generate(100, (index) => 
         ListTile(
-          leading: CircleAvatar(),
-          title: Text("Zahangir Alam"),
+          leading: CircleAvatar(child: Text("$index"),),
+          title: Text("Zahangir Alam $index"),
           subtitle: Text("how are you?"),
           trailing: Icon(Icons.check),
+        )
         )
       ],)
     );
