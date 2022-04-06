@@ -18,7 +18,9 @@ class _AddDatapageState extends State<AddDatapage> {
      FirebaseFirestore firebaseFirestore = await FirebaseFirestore.instance;
     await firebaseFirestore
     .collection('batch-11')
-    .add({"email": emailC.text, "password": passwordC.text}); 
+    .add({"email": emailC.text, "password": passwordC.text}).catchError((e) {
+      print(e.toString());
+    }).whenComplete(() => print("success")); 
    }
 
 
