@@ -1,40 +1,118 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_example/main_page.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_example/showData.dart';
+class LogInPage extends StatelessWidget {
+  const LogInPage({Key? key}) : super(key: key);
 
-void main() async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      
-      title: 'NOTE APP',
-      debugShowCheckedModeBanner: false,
-    
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        brightness: Brightness.dark,
-        
-      ),
-      home: ShowDataPage(),
+    return Scaffold(
+      body: SafeArea(
+          child: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 25,
+              ),
+              Text('JJ SHOP'),
+              SizedBox(
+                height: 25,
+              ),
+              Image.asset('/images/heavy_box.png'),
+              SizedBox(
+                height: 25,
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.person),
+                          labelText: 'User name',
+                        ),
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      TextFormField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock),
+                          labelText: 'User password',
+                        ),
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      MaterialButton(
+                        color: Colors.amber,
+                        minWidth: double.infinity,
+                        height: 40,
+                        splashColor: Colors.black,
+                        onPressed: () {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => SignUpPage()));
+                        },
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Colors.amber,
+                          ),
+                          borderRadius: BorderRadius.circular(0),
+                        ),
+                        child: Text('Log In'),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             ForgatePasswordPage()));
+
+                                  ////SignUpPage
+                                },
+                                child: Text(
+                                  'Forgate Password',
+                                  style: TextStyle(color: Colors.black),
+                                )),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => SignUpPage()));
+                              },
+                              child: Text(
+                                'New Account',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      )),
     );
   }
 }
