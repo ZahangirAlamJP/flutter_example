@@ -23,4 +23,23 @@ if (e.code == "ERROR_WEAK_PASSWORD") {
       return e.toString();
     }
   }
+
+
+  static Future<String?> signInAccount(String email, String password) async {
+    try {
+    await  FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email, 
+      password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+return e.message;
+    }
+    catch(e){
+      return e.toString();
+    }
+  }
+  static Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }
+

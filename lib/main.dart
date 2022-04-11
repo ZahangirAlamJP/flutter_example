@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_example/screen/landing_screen.dart';
 import 'package:flutter_example/screen/login_screen.dart';
 
 void main() async {
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         backgroundColor: Colors.white,
       ),
-      home: LoginScreen(),
+     // home: LoginScreen(),
+     home: LandingScreen(),
     );
   }
 }
