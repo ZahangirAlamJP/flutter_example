@@ -5,29 +5,29 @@ import 'package:flutter_example/utils/styles.dart';
 import 'package:flutter_example/widgets/ecoTextField.dart';
 import 'package:flutter_example/widgets/eco_button.dart';
 
-class LogUpScreen extends StatefulWidget {
+
+
+
+class SignupScreen extends StatefulWidget {
   @override
-  State<LogUpScreen> createState() => _LogUpScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LogUpScreenState extends State<LogUpScreen> {
- // const LogUpScreen({ Key? key }) : super(key: key);
-  TextEditingController emailC= TextEditingController();
+class _SignupScreenState extends State<SignupScreen> {
+  // const SignupScreen({Key? key}) : super(key: key);
+  TextEditingController emailC = TextEditingController();
 
-   TextEditingController passwordC = TextEditingController();
+  TextEditingController passwordC = TextEditingController();
 
-      TextEditingController retypepasswordC = TextEditingController();
-      FocusNode? passwordFocus;
-      FocusNode? reTypePasswordFocus;
+  TextEditingController retypepasswordC = TextEditingController();
+  FocusNode? passwordfocus;
+  FocusNode? retypepasswordfocus;
+  final formkey = GlobalKey<FormState>();
 
-      final formkey = GlobalKey<FormState>();
-
-      bool isPassword = true;
-      bool isRetryPassword = true;
-      bool formStateLoading = false;
-
-
-   @override
+  bool ispassword = true;
+  bool isretypepassword = true;
+  bool formStateLoading = false;
+  @override
   void dispose() {
     emailC.dispose();
     passwordC.dispose();
@@ -35,142 +35,155 @@ class _LogUpScreenState extends State<LogUpScreen> {
     super.dispose();
   }
 
-Future<void> ecoDialogue (String error) async{
-  showDialog(
-    context: context, 
-    builder: (_){
-    return AlertDialog(
-      title: Text(error),
-      actions: [
-        EcoButton(
-          title: "CLOSE",
-          onPress: () {
-            Navigator.pop(context);
-          },
-        )
-      ],
-    );
-  });
-}
-  submit() async{
-if (formkey.currentState!.validate()) {
-  if (passwordC.text == retypepasswordC.text) {
-   setState(() {
-     formStateLoading = true;
-   });
-
-
- // ecoDialogue("YES MATCHED");
-FirebaseServices.createAccount(emailC.text, passwordC.text).then((value) => 
- Navigator.push(context, MaterialPageRoute(builder: (_)=>LoginScreen())));
+  Future<void> ecoDialogue(String error) async {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            title: Text(error),
+            actions: [
+              EcoButton(
+                title: 'CLOSE',
+                onPress: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
   }
-  
-}
 
+  submit() async {
+    if (formkey.currentState!.validate()) {
+      setState(() {
+        formStateLoading = true;
+      });
+      if (passwordC.text == retypepasswordC.text) {
+        String? accountstatus =
+            await FirebaseServices.createAccount(emailC.text, passwordC.text);
+
+        //print(accountstatus);
+        if (accountstatus != null) {
+          ecoDialogue(accountstatus);
+          setState(() {
+            formStateLoading = false;
+          });
+        } else {
+          Navigator.pop(context);
+        }
+
+        //  Navigator.push(
+        //       context, MaterialPageRoute(builder: (_) => LoginScreen()));
+
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: SafeArea(
           child: Container(
             width: double.infinity,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-              Text("Welcome,\n Please Creat Your Account",textAlign: TextAlign.center,style: EcoStyle.boldStyle,),
-              Column(
-                children: [
-                  SingleChildScrollView(
-                    child: Form(
-                      key: formkey,
-                      child: Column(children: [
-                      EcoTextField(
-                        controller: emailC,
-                        hintText: "Email...",
-                        validate: (v) {
-                          if (v!.isEmpty || 
-                          !v.contains("@") || 
-                          !v.contains(".com") ) {
-                            return "email is badly formated";
-                          }
-                          return null;
-                        },
-                        inputAction: TextInputAction.next,
-
-                        icon: Icon(Icons.email),),
-                      EcoTextField(
-                        IsPassword: isPassword,
-                        check: true,
-                        validate: (v) {
-                          if (v!.isEmpty){
-                            return "password should not be emply";
-                          }
-                          return null;
-                        },
-                        inputAction: TextInputAction.next,                        
-                        controller: passwordC,     
-                                                                   
-                        hintText: "Password...",
-                        
-                        icon: IconButton(onPressed: (){
-                          setState(() {
-                            isPassword = !isPassword;
-                          });                          
-                        }, icon: isPassword
-                        ?const Icon(Icons.visibility)
-                        :const Icon(Icons.visibility_off),
-                        ),
-                        ),
-                        
-                       EcoTextField(
-                         IsPassword: isRetryPassword,
-                         controller: retypepasswordC,
-                         validate: (v) {
-                          if (v!.isEmpty){
-                            return "password should not be emply";
-                          }
-                          return null;
-                        },
-                         hintText: "Retype Password...",
-                         icon: IconButton(onPressed: (){
-                          setState(() {
-                            isRetryPassword = !isRetryPassword;
-                          });
-                          
-                        }, icon: isRetryPassword
-                        ?const Icon(Icons.visibility)
-                        :const Icon(Icons.visibility_off),
-                        ),
-                         
-                         ),
-                      EcoButton(title: "SIGNUP",
-                      isLoginButtom: true,
-                      onPress: () {
-                        submit();
-                        
-                      },
-                      isLoading: formStateLoading,
-                      
-                      ),
-                        
-                    ],),
-                          
-                    
-                    ),
-                  ),
-                  
-                ],
-              ),
-              EcoButton(title: "BACK TO LOGIN",
-              onPress: () {
-                Navigator.pop(context);
+                const Text(
+                  "WELCOME \n Please Create your Account",
+                  textAlign: TextAlign.center,
+                  style: EcoStyle.boldStyle,
+                ),
+                const SizedBox(height: 50),
+                Column(
+                  children: [
+                    SingleChildScrollView(
+                      child: Form(
+                          key: formkey,
+                          child: Column(
+                            children: [
+                              EcoTextField(
+                                check: true,
+                                validate: (v) {
+                                  if (v!.isEmpty) {
+                                    return "email is badly formated";
+                                  }
+                                  return null;
                                 },
-                      isLoginButtom: false,),
-            ],
+                                inputAction: TextInputAction.next,
+                                isPassowrd: false,
+                                controller: emailC,
+                                hintText: "Email...",
+                                icon: const Icon(Icons.email),
+                              ),
+                              EcoTextField(
+                                validate: (v) {
+                                  if (v!.isEmpty) {
+                                    return "password should not be empty";
+                                  }
+                                  return null;
+                                },
+                                focusNode: passwordfocus,
+                                inputAction: TextInputAction.next,
+                                isPassowrd: ispassword,
+                                controller: passwordC,
+                                hintText: "Password...",
+                                icon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      ispassword = !ispassword;
+                                    });
+                                  },
+                                  icon: ispassword
+                                      ? const Icon(Icons.visibility)
+                                      : const Icon(Icons.visibility_off),
+                                ),
+                              ),
+                              EcoTextField(
+                                isPassowrd: isretypepassword,
+                                controller: retypepasswordC,
+                                validate: (v) {
+                                  if (v!.isEmpty) {
+                                    return "password should not be empty";
+                                  }
+                                  return null;
+                                },
+                                hintText: "Retype Password...",
+                                icon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      isretypepassword = !isretypepassword;
+                                    });
+                                  },
+                                  icon: isretypepassword
+                                      ? const Icon(Icons.visibility)
+                                      : const Icon(Icons.visibility_off),
+                                ),
+                              ),
+                              EcoButton(
+                                title: "SIGNUP",
+                                isLoginButton: true,
+                                onPress: () {
+                                  submit();
+                                },
+                                isLoading: formStateLoading,
+                              ),
+                            ],
+                          )),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 50),
+                EcoButton(
+                  title: "BACK TO LOGIN",
+                  onPress: () {
+                    Navigator.pop(context);
+                  },
+                  isLoginButton: false,
+                ),
+              ],
             ),
-            ),
+          ),
         ),
       ),
     );

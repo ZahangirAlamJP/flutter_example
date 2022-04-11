@@ -11,7 +11,7 @@ class LayoutScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.minWidth> 600) {
-          return WebLogInScreen();
+          return WebLoginScreen();
         }
         else {
           return LandingScreen();

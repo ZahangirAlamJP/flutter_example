@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_example/screen/landing_screen.dart';
 import 'package:flutter_example/screen/layout_screen.dart';
 import 'package:flutter_example/screen/login_screen.dart';
+import 'package:flutter_example/screen/web_side/web_login.dart';
+import 'package:flutter_example/screen/web_side/web_main.dart';
 import 'package:sizer/sizer.dart';
 
 void main() async {
@@ -18,7 +20,6 @@ void main() async {
     storageBucket: "example-f9a3b.appspot.com",
     messagingSenderId: "34232398125",
     appId: "1:34232398125:web:fa64ba6840e0e08c3523a4",
-    measurementId: "G-5W1ECJDJJX"
         ));
   }else {
     await Firebase.initializeApp();
@@ -72,6 +73,10 @@ class MyApp extends StatelessWidget {
        // home: LoginScreen(),
        //  home: LandingScreen(),
        home: LayoutScreen(),
+       routes: {     
+      WebLoginScreen.id:(context) => WebLoginScreen(),     
+      WebMainScreen.id:(context)=> WebMainScreen(),
+       },
       ),
     );
   }

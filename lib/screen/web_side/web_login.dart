@@ -1,76 +1,124 @@
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_example/screen/web_side/web_main.dart';
+import 'package:flutter_example/services/firebase_services.dart';
 import 'package:flutter_example/utils/styles.dart';
 import 'package:flutter_example/widgets/ecoTextField.dart';
 import 'package:flutter_example/widgets/eco_button.dart';
+import 'package:flutter_example/widgets/eco_dialoge.dart';
 import 'package:sizer/sizer.dart';
-class WebLogInScreen extends StatelessWidget {
-  //const WebLogInScreen({ Key? key }) : super(key: key);
-  TextEditingController emailC = TextEditingController();
-    TextEditingController passwordC = TextEditingController();
-    final formkey = GlobalKey<FormState>();
-    String email ="admin@gmail.com";
-    String password ="admin123";
-    submit(BuildContext context) {
-if (formkey.currentState!.validate()) {
- if (emailC.text == email && passwordC.text == password) {
-   Navigator.push(
-     context, MaterialPageRoute(builder: (_)=>WebMainScreen()));
- }
+
+class WebLoginScreen extends StatefulWidget {
+  static const String id = "weblogin";
+     
+
+  @override
+  State<WebLoginScreen> createState() => _WebLoginScreenState();
 }
+
+class _WebLoginScreenState extends State<WebLoginScreen> {
+  // const WebLoginScreen({Key? key}) : super(key: key);
+  TextEditingController userNameC = TextEditingController();
+
+  TextEditingController passwordC = TextEditingController();
+
+  final formKey = GlobalKey<FormState>();
+  bool formStateLoading = false;
+
+  submit(BuildContext context) async {
+    if (formKey.currentState!.validate()) {
+      setState(() {
+        formStateLoading = true;
+      });
+      await FirebaseServices.adminSignIn(userNameC.text).then((value) async {
+        if (value['username'] == userNameC.text &&
+            value['password'] == passwordC.text) {
+          try {
+            UserCredential user =
+                await FirebaseAuth.instance.signInAnonymously();
+            if (user != null) {
+              Navigator.pushReplacementNamed(context, WebMainScreen.id);
+            }
+          } catch (e) {
+            setState(() {
+              formStateLoading = false;
+            });
+            showDialog(
+                context: context,
+                builder: (_) {
+                  return EcoDialogue(
+                    title: e.toString(),
+                  );
+                });
+          }
+        }
+      });
     }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w,
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 5),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
-            child: Form(
-              key: formkey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("WELCOME ADMIN",style: EcoStyle.boldStyle,),
-                  Text("Log in to Your Account",style: EcoStyle.boldStyle,),
-                
-                  EcoTextField(
-                    controller: emailC,
-                    validate: (v) {
-                            if (v!.isEmpty || 
-                            !v.contains("@") || 
-                            !v.contains(".com") ) {
-                              return "email should not be empty";
-                            }
-                            return null;
-                          },
-                  ),
-                  EcoTextField(
-                    controller: passwordC,
-                    validate: (v) {
-                            if (v!.isEmpty){
-                              return "password should not be emply";
-                            }
-                            return null;
-                          },
-                  ),
-                  EcoButton(isLoading: true,
-                  onPress: () {
-                    submit(context);
-                  },),
-                ],
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.black, width: 3),
+                borderRadius: BorderRadius.circular(12)),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      "WELCOME ADMIN",
+                      style: EcoStyle.boldStyle,
+                    ),
+                    const Text(
+                      "Log in to your Account",
+                      style: EcoStyle.boldStyle,
+                    ),
+                    EcoTextField(
+                      controller: userNameC,
+                      hintText: "UserName...",
+                      maxLines: 1,
+                      validate: (v) {
+                        if (v!.isEmpty) {
+                          return "email should not be empty";
+                        }
+                        return null;
+                      },
+                    ),
+                    EcoTextField(
+                      controller: passwordC,
+                      isPassowrd: true,
+                      maxLines: 1,
+                      hintText: "Password...",
+                      validate: (v) {
+                        if (v!.isEmpty) {
+                          return "password should not be empty";
+                        }
+                        return null;
+                      },
+                    ),
+                    EcoButton(
+                      isLoginButton: true,
+                      isLoading: formStateLoading,
+                      onPress: () {
+                        submit(context);
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
-      ),),
+      ),
     );
   }
 }
