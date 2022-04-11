@@ -31,10 +31,14 @@ class HomeScreen extends StatelessWidget {
               child: Text("Home Screen",style: EcoStyle.boldStyle,
               ),
               ),
-              CarouselSlider(items: images.map((e) => Container(
-                child: Image.network(e),
+              CarouselSlider(items: images.map((e) => ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: Image.network(e,
+                fit: BoxFit.fill,),
               )).toList(), options: CarouselOptions(
-                height: 300
+                height: 200,
+                autoPlay: true
+               
               )),
           ],
         )
