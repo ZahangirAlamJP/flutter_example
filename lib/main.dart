@@ -5,6 +5,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_example/screen/landing_screen.dart';
 import 'package:flutter_example/screen/layout_screen.dart';
 import 'package:flutter_example/screen/login_screen.dart';
+import 'package:flutter_example/screen/web_side/addproducts_screen.dart';
+import 'package:flutter_example/screen/web_side/deleteProducts_screen.dart';
+import 'package:flutter_example/screen/web_side/deshboard_screen.dart';
+import 'package:flutter_example/screen/web_side/updateProducts_screen.dart';
 import 'package:flutter_example/screen/web_side/web_login.dart';
 import 'package:flutter_example/screen/web_side/web_main.dart';
 import 'package:sizer/sizer.dart';
@@ -76,6 +80,11 @@ class MyApp extends StatelessWidget {
        routes: {     
       WebLoginScreen.id:(context) => WebLoginScreen(),     
       WebMainScreen.id:(context)=> WebMainScreen(),
+
+      AddProductScreen.id:(context)=> AddProductScreen(),
+      UpdateProductScreen.id:(context)=> UpdateProductScreen(),
+      DeleteProductScreen.id:(context)=> DeleteProductScreen(),
+      DashBoardScreen.id:(context)=> DashBoardScreen(),
        },
       ),
     );
