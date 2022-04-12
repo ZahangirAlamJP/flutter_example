@@ -255,6 +255,9 @@ save() async {
         setState(() {
            setState(() {
       isSaving = false;
+      imageUrls.clear();
+      images.clear();
+      clearFields();
       ScaffoldMessenger.of(context)
       .showSnackBar(SnackBar(content: Text("ADDED SUCCESSFULLY")));
       //ScaffoldMessenger.of(context).showSnackBar(snackBar(context : Text("f;ldjf")));
@@ -271,7 +274,12 @@ save() async {
    // });
   }
 
-
+clearFields() {
+  setState(() {
+    selctedValue = "";
+    productNameC.clear();
+  });
+}
 
   pickImage() async {
     final List<XFile>? pickImage = await imagePicker.pickMultiImage();
