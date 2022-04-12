@@ -182,6 +182,7 @@ EcoTextField(controller: detailC,
    
                 EcoButton(
                   title: "SAVE",
+                  isLoginButton: true,
                   onPress: () {
                     save();
                   },
