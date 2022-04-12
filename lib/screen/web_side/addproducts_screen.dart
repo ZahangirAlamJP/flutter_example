@@ -31,7 +31,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   TextEditingController priceC = TextEditingController();
   TextEditingController discountPriceC = TextEditingController();
   TextEditingController serialCodeC = TextEditingController();
-  TextEditingController brandC = TextEditingController();
+  // TextEditingController brandC = TextEditingController();
 
   bool isOnSale = false;
   bool isPopular = false;
@@ -59,27 +59,38 @@ List<String> imageUrls = [];
                const Text("ADD PRODUCT",
                 style: EcoStyle.boldStyle,
                 ),
-                DropdownButtonFormField(
-                  validator: (value) {
-                    if (value == null) {
-                      return "category must be selected";
-                    }
-                    return null;
-                  },
-                  value: selctedValue,
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 17, vertical: 7),
+      decoration: BoxDecoration(
+          color: Colors.grey.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(10)),
+                  child: DropdownButtonFormField(
+                    hint: const Text("Choose Category"),
+                    decoration:const  InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(10),
+                    ),
+                    validator: (value) {
+                      if (value == null) {
+                        return "category must be selected";
+                      }
+                      return null;
+                    },
+                    value: selctedValue,
+                    
+                    items: categories
+                  .map((e) => DropdownMenuItem<String>(
+                    value: e,
+                    child: Text(e.toString())))
                   
-                  items: categories
-                .map((e) => DropdownMenuItem<String>(
-                  value: e,
-                  child: Text(e.toString())))
-                
-                .toList(), 
+                  .toList(), 
     
-                onChanged: (value) {
-                  setState(() {
-                    selctedValue = value.toString();
-                  });
-                }),
+                  onChanged: (value) {
+                    setState(() {
+                      selctedValue = value.toString();
+                    });
+                  }),
+                ),
                 EcoButton(
                   title: "PICK IMAGES",
                   onPress:  () {
@@ -87,15 +98,15 @@ List<String> imageUrls = [];
                   },
                   isLoginButton: true,
                 ),
-                EcoButton(
-                  title: "UPLOAD IMAGES",
-                  isLoading: isUploading,
-                  onPress:  () {
-                   uploadImages();
-                  },
-                  isLoginButton: true,
-                ),
-                ///
+                // EcoButton(
+                //   title: "UPLOAD IMAGES",
+                //   isLoading: isUploading,
+                //   onPress:  () {
+                //    uploadImages();
+                //   },
+                //   isLoginButton: true,
+                // ),
+               
                 Container(
                   height: 45.h,
                   decoration: BoxDecoration(
@@ -138,6 +149,14 @@ List<String> imageUrls = [];
          return "should not be empty";
        } return null;
      },),
+EcoTextField(controller: detailC,
+     hintText: "enter product detail...",
+     validate: (v) {
+       if (v!.isEmpty) {
+         return "should not be empty";
+       } return null;
+     },),
+
      EcoTextField(controller: priceC,
      hintText: "enter product price ...",
      validate: (v) {
@@ -145,13 +164,7 @@ List<String> imageUrls = [];
          return "should not be empty";
        } return null;
      },),
-     EcoTextField(controller: detailC,
-     hintText: "enter product detail...",
-     validate: (v) {
-       if (v!.isEmpty) {
-         return "should not be empty";
-       } return null;
-     },),
+     
      EcoTextField(controller: discountPriceC,
      hintText: "enter product discount price ...",
      validate: (v) {
