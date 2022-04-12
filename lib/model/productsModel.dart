@@ -50,7 +50,7 @@ static Future<void> addProducts(Products products) async{
   await db.add(data);
 }
 //////////////////////////////
-Future<void> UpdateProducts(String id, Products UpdateProducts) async{
+static Future<void> UpdateProducts(String id, Products UpdateProducts) async{
     CollectionReference db = FirebaseFirestore.instance.collection("products");
   Map<String, dynamic> data = {
     "category" : UpdateProducts.category,

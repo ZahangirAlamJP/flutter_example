@@ -9,6 +9,7 @@ import 'package:flutter_example/screen/web_side/addproducts_screen.dart';
 import 'package:flutter_example/screen/web_side/deleteProducts_screen.dart';
 import 'package:flutter_example/screen/web_side/deshboard_screen.dart';
 import 'package:flutter_example/screen/web_side/updateProducts_screen.dart';
+import 'package:flutter_example/screen/web_side/update_complete_screen.dart';
 import 'package:flutter_example/screen/web_side/web_login.dart';
 import 'package:flutter_example/screen/web_side/web_main.dart';
 import 'package:sizer/sizer.dart';
@@ -85,6 +86,7 @@ class MyApp extends StatelessWidget {
       UpdateProductScreen.id:(context)=> UpdateProductScreen(),
       DeleteProductScreen.id:(context)=> DeleteProductScreen(),
       DashBoardScreen.id:(context)=> DashBoardScreen(),
+      UpdateComplateScreen.id:(context) => UpdateComplateScreen(),
        },
       ),
     );
