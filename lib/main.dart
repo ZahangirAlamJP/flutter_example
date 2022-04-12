@@ -81,12 +81,11 @@ class MyApp extends StatelessWidget {
        routes: {     
       WebLoginScreen.id:(context) => WebLoginScreen(),     
       WebMainScreen.id:(context)=> WebMainScreen(),
-
       AddProductScreen.id:(context)=> AddProductScreen(),
       UpdateProductScreen.id:(context)=> UpdateProductScreen(),
       DeleteProductScreen.id:(context)=> DeleteProductScreen(),
       DashBoardScreen.id:(context)=> DashBoardScreen(),
-      UpdateComplateScreen.id:(context) => UpdateComplateScreen(),
+      UpdateCompleteProductScreen.id:(context) => UpdateCompleteProductScreen(),
        },
       ),
     );
