@@ -4,10 +4,16 @@ import 'package:flutter_example/screen/home_cards.dart';
 import 'package:flutter_example/services/firebase_services.dart';
 import 'package:flutter_example/utils/styles.dart';
 
-
+List categories = [
+  "GROCERY",
+ "ELECTRONICES", 
+ "COSMETICES", 
+ "PHAPMACY",
+ "GARMENTS"
+ ];
 class HomeScreen extends StatelessWidget {
-  //const HomeScreen({ Key? key }) : super(key: key);
-List categories = ["GROCERY", "ELECTRONICES", "COSMETICES", "PHAPMACY","GARMENTS"];
+HomeScreen({ Key? key }) : super(key: key);
+
 
 
   final List images = [
