@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_example/screen/web_side/updateProducts_screen.dart';
+
 class Products {
-  String? Category;
+  String? category;
   String? id;
   String? productName;
   String? detail;
@@ -10,8 +14,62 @@ class Products {
   List<String>? imageUrls;
   bool? isOnsale;
   bool? isPopular;
-  bool? inFavourite;
+  bool? isFavourite;
 
-Products({this.Category, this.id, this.productName, this.detail, this.price,this.discountPrice, this.serialCode, 
-this.imageUrls, this.isOnsale, this.isPopular, this.inFavourite});
+Products({
+required  this.id, 
+required  this.productName, 
+required  this.detail, 
+required  this.category, 
+required  this.price,
+required  this.discountPrice, 
+required  this.serialCode, 
+required  this.imageUrls, 
+required  this.isOnsale, 
+required  this.isPopular, 
+required  this.isFavourite
+
+});
+
+
+static Future<void> addProducts(Products products) async{
+  CollectionReference db = FirebaseFirestore.instance.collection("products");
+  Map<String, dynamic> data = {
+    "category" : products.category,
+    "productName" : products.productName,
+    "id" : products.id,
+    "detail" : products.detail,
+    "price" : products.price,
+    "discountPrice" : products.discountPrice,
+    "serialCode" : products.serialCode,
+    "imageUrls" : products.imageUrls,
+    "isOnsale" : products.isOnsale,
+    "isFavourite" : products.isFavourite,
+
+  };
+  await db.add(data);
+}
+//////////////////////////////
+Future<void> UpdateProducts(String id, Products UpdateProducts) async{
+    CollectionReference db = FirebaseFirestore.instance.collection("products");
+  Map<String, dynamic> data = {
+    "category" : UpdateProducts.category,
+    "productName" : UpdateProducts.productName,
+    "id" : UpdateProducts.id,
+    "detail" : UpdateProducts.detail,
+    "price" : UpdateProducts.price,
+    "discountPrice" : UpdateProducts.discountPrice,
+    "serialCode" : UpdateProducts.serialCode,
+    "imageUrls" :UpdateProducts.imageUrls,
+    "isOnsale" : UpdateProducts.isOnsale,
+    "isFavourite" : UpdateProducts.isFavourite,
+
+  };
+  await db.doc(id).update(data);
+}
+//////////////////////////
+Future<void> deleteProducts()async{
+    CollectionReference db = FirebaseFirestore.instance.collection("products");
+  await db.doc(id).delete();
+}
 }

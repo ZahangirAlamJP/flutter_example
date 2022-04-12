@@ -1,17 +1,22 @@
 import 'dart:html';
 import 'dart:io';
+import 'dart:isolate';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_example/model/productsModel.dart';
 import 'package:flutter_example/screen/home_screen.dart';
 import 'package:flutter_example/utils/styles.dart';
 import 'package:flutter_example/widgets/ecoTextField.dart';
 import 'package:flutter_example/widgets/eco_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
+import 'package:uuid/uuid.dart';
+
+
 
 
 class AddProductScreen extends StatefulWidget {
@@ -46,9 +51,11 @@ bool isUploading = false;
 final imagePicker = ImagePicker();
 List<XFile> images = [];
 List<String> imageUrls = [];
+ var uuid = Uuid();
 
   @override
   Widget build(BuildContext context) {
+   
     return SingleChildScrollView(
       child: Container(
         child: Center(
@@ -179,6 +186,24 @@ EcoTextField(controller: detailC,
          return "should not be empty";
        } return null;
      },),
+     SwitchListTile(
+       value: isOnSale, 
+       title: Text("Is this Product on Sale?"),
+       onChanged: (v) {
+         setState(() {
+           isOnSale = !isOnSale;
+         });
+       }
+       ),
+         SwitchListTile(
+       value: isPopular, 
+       title: Text("Is this Product on Popular?"),
+       onChanged: (v) {
+         setState(() {
+           isPopular = !isPopular;
+         });
+       }
+       ),
    
                 EcoButton(
                   title: "SAVE",
@@ -215,13 +240,35 @@ save() async {
       isSaving = true;
     });
     await uploadImages();
-   await FirebaseFirestore.instance.collection('products').add({"images" : imageUrls}).whenComplete(() {
-      setState(() {
-        isSaving = false;
-        images.clear();
-        imageUrls.clear();
-      });
+    await Products.addProducts(Products(
+      id: uuid.v4(), 
+      productName: productNameC.text, 
+      detail: detailC.text, 
+      category: selctedValue, 
+      price: int.parse(priceC.text), 
+      discountPrice: int.parse(discountPriceC.text), 
+      serialCode: serialCodeC.text, 
+      imageUrls: imageUrls, 
+      isOnsale: isOnSale, 
+      isPopular: isPopular, 
+      isFavourite: isFavourite)).whenComplete(() {
+        setState(() {
+           setState(() {
+      isSaving = false;
+      ScaffoldMessenger.of(context)
+      .showSnackBar(SnackBar(content: Text("ADDED SUCCESSFULLY")));
+      //ScaffoldMessenger.of(context).showSnackBar(snackBar(context : Text("f;ldjf")));
+    // ScaffoldMessengerState.of(context).showSnackBar(snackBar(context: Text("ADDDD")));
     });
+        });
+      });
+  //  await FirebaseFirestore.instance.collection('products').add({"images" : imageUrls}).whenComplete(() {
+  //     setState(() {
+  //       isSaving = false;
+  //       images.clear();
+  //       imageUrls.clear();
+  //     });
+   // });
   }
 
 
