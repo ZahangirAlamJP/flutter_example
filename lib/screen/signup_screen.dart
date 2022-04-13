@@ -7,7 +7,6 @@ import 'package:flutter_example/widgets/eco_button.dart';
 
 
 
-
 class SignupScreen extends StatefulWidget {
   @override
   State<SignupScreen> createState() => _SignupScreenState();

@@ -121,3 +121,4 @@ class UpdateProductScreen extends StatelessWidget {
     );
   }
 }
+

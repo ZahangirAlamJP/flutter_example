@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class EcoTextField extends StatefulWidget {
   String? hintText;
   TextEditingController? controller;

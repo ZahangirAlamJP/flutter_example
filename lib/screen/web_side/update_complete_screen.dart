@@ -1,6 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_example/model/categoryModel.dart';
 import 'package:flutter_example/model/productsModel.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
@@ -36,7 +37,7 @@ class _UpdateCompleteScreenState extends State<UpdateCompleteScreen> {
   bool isPopular = false;
   bool isFavourite = false;
 
-  String? selectedValue;
+  String? selectedValue = "";
   bool isSaving = false;
   bool isUploading = false;
 
@@ -93,7 +94,7 @@ class _UpdateCompleteScreenState extends State<UpdateCompleteScreen> {
                         value: selectedValue,
                         items: categories
                             .map((e) => DropdownMenuItem<String>(
-                                value: e, child: Text(e)))
+                                value: e.title, child: Text(e.title!)))
                             .toList(),
                         onChanged: (value) {
                           setState(() {
@@ -379,3 +380,4 @@ class _UpdateCompleteScreenState extends State<UpdateCompleteScreen> {
     imageUrls.addAll(widget.products!.imageUrls!);
   }
 }
+

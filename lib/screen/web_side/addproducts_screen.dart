@@ -16,6 +16,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../model/categoryModel.dart';
+
 
 
 class AddProductScreen extends StatefulWidget {
@@ -50,7 +52,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
   var uuid = Uuid();
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
       child: Container(
         child: Center(
@@ -83,7 +84,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       value: selectedValue,
                       items: categories
                           .map((e) => DropdownMenuItem<String>(
-                              value: e, child: Text(e.toString())))
+                              value: e.title, child: Text(e.title!)))
                           .toList(),
                       onChanged: (value) {
                         setState(() {
@@ -113,9 +114,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   },
                 ),
                 EcoTextField(
-                  
                   controller: priceC,
-                   
                   hintText: "enter product price...",
                   validate: (v) {
                     if (v!.isEmpty) {
@@ -144,17 +143,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     return null;
                   },
                 ),
-                // EcoTextField(
-                //   controller: brandC,
-                //   hintText: "enter product brand...",
-                //   validate: (v) {
-                //     if (v!.isEmpty) {
-                //       return "should not be empty";
-                //     }
-                //     return null;
-                //   },
-                // ),
-                
+                EcoTextField(
+                  controller: brandC,
+                  hintText: "enter product brand...",
+                  validate: (v) {
+                    if (v!.isEmpty) {
+                      return "should not be empty";
+                    }
+                    return null;
+                  },
+                ),
                 EcoButton(
                   title: "PICK IMAGES",
                   onPress: () {
@@ -229,7 +227,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     }),
                 EcoButton(
                   title: "SAVE",
-                  
                   isLoginButton: true,
                   onPress: () {
                     save();
@@ -248,21 +245,30 @@ class _AddProductScreenState extends State<AddProductScreen> {
     setState(() {
       isSaving = true;
     });
- await uploadImages();
+    await uploadImages();
     await Products.addProducts(Products(
-     category: selectedValue,
-      id: uuid.v4(),
-      productName: productNameC.text,
-     detail: detailC.text,
-      price: int.parse(priceC.text), 
-      brand: brandC.text,
-      discountPrice: int.parse(discountPriceC.text),
-      serialCode: serialCodeC.text,
-       imageUrls: imageUrls,
-     isSale: isOnSale,
-      isPopular: isPopular, 
-      isFavourite: isFavourite
-      ));
+            category: selectedValue,
+            id: uuid.v4(),
+            brand: brandC.text,
+            productName: productNameC.text,
+            detail: detailC.text,
+            price: int.parse(priceC.text),
+            discountPrice: int.parse(discountPriceC.text),
+            serialCode: serialCodeC.text,
+            imageUrls: imageUrls,
+            isSale: isOnSale,
+            isPopular: isPopular,
+            isFavourite: isFavourite))
+        .whenComplete(() {
+      setState(() {
+        isSaving = false;
+        imageUrls.clear();
+        images.clear();
+        clearFields();
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("ADDED SUCCESSFULLY")));
+      });
+    });
     // await FirebaseFirestore.instance
     //     .collection("products")
     //     .add({"images": imageUrls}).whenComplete(() {
@@ -292,7 +298,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
     }
   }
 
-Future postImages(XFile? imageFile) async {
+  Future postImages(XFile? imageFile) async {
     setState(() {
       isUploading = true;
     });
@@ -306,16 +312,15 @@ Future postImages(XFile? imageFile) async {
       );
       urls = await ref.getDownloadURL();
       setState(() {
-           isUploading = false;
+        isUploading = false;
       });
       return urls;
     }
   }
-uploadImages() async {
+
+  uploadImages() async {
     for (var image in images) {
       await postImages(image).then((downLoadUrl) => imageUrls.add(downLoadUrl));
     }
   }
-
-
 }

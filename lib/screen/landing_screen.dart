@@ -6,6 +6,7 @@ import 'package:flutter_example/screen/login_screen.dart';
 import 'package:flutter_example/utils/styles.dart';
 
 
+
 class LandingScreen extends StatelessWidget {
   // LandingScreen({Key? key}) : super(key: key);
   Future<FirebaseApp> initilize = Firebase.initializeApp();
@@ -39,7 +40,6 @@ class LandingScreen extends StatelessWidget {
                   return LoginScreen();
                 } else {
                   return HomeScreen();
-                 // return BottomPage();
                 }
               }
               return Scaffold(
