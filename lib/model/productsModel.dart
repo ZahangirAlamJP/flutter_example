@@ -11,7 +11,7 @@ class Products {
   int? discountPrice;
   String? serialCode;
 
-  List<String>? imageUrls;
+  List<dynamic>? imageUrls;
   bool? isOnsale;
   bool? isPopular;
   bool? isFavourite;
@@ -44,6 +44,7 @@ static Future<void> addProducts(Products products) async{
     "serialCode" : products.serialCode,
     "imageUrls" : products.imageUrls,
     "isOnsale" : products.isOnsale,
+     "isPopular": products.isPopular,
     "isFavourite" : products.isFavourite,
 
   };
@@ -62,13 +63,14 @@ static Future<void> UpdateProducts(String id, Products UpdateProducts) async{
     "serialCode" : UpdateProducts.serialCode,
     "imageUrls" :UpdateProducts.imageUrls,
     "isOnsale" : UpdateProducts.isOnsale,
+    
     "isFavourite" : UpdateProducts.isFavourite,
 
   };
   await db.doc(id).update(data);
 }
 //////////////////////////
-Future<void> deleteProducts()async{
+static Future<void> deleteProducts(String id)async{
     CollectionReference db = FirebaseFirestore.instance.collection("products");
   await db.doc(id).delete();
 }

@@ -1,8 +1,13 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_example/screen/home_cards.dart';
 import 'package:flutter_example/services/firebase_services.dart';
 import 'package:flutter_example/utils/styles.dart';
+import 'package:sizer/sizer.dart';
+
+import '../widgets/category_home_boxes.dart';
 
 List categories = [
   "GROCERY",
@@ -37,10 +42,13 @@ HomeScreen({ Key? key }) : super(key: key);
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Center(
-                child: Text("Home Screen",style: EcoStyle.boldStyle,
-                ),
-                ),
+              Container(child: Text("ECO BUY",style: EcoStyle.boldStyle,
+               ),),
+              CategoryHomeBoxes(),
+              // Center(
+              //   child: Text("Home Screen",style: EcoStyle.boldStyle,
+              //   ),
+              //   ),
                 CarouselSlider(items: images.map((e) => Stack(
                   children: [
                       
@@ -87,12 +95,16 @@ HomeScreen({ Key? key }) : super(key: key);
                   autoPlay: true
                  
                 )),
+                /*
                 HomeCards(title: categories[0],),
                  HomeCards(title: categories[1],),
                   HomeCards(title: categories[2],),
                    HomeCards(title: categories[3],),
+                   
               //  HomeCards(title: "GROCERY",)
-                
+                */
+                Text("PUPULAR ITEM",style: EcoStyle.boldStyle,
+               ),
             ],
           ),
         )
@@ -100,6 +112,3 @@ HomeScreen({ Key? key }) : super(key: key);
     );
   }
 }
-
-
-// carousel slider

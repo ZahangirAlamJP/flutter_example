@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
       UpdateProductScreen.id:(context)=> UpdateProductScreen(),
       DeleteProductScreen.id:(context)=> DeleteProductScreen(),
       DashBoardScreen.id:(context)=> DashBoardScreen(),
-      UpdateCompleteProductScreen.id:(context) => UpdateCompleteProductScreen(),
+    //   UpdateCompleteProductScreen.id:(context) => UpdateCompleteProductScreen(),
        },
       ),
     );

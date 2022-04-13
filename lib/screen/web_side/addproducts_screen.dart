@@ -233,7 +233,6 @@ save() async {
     await Products.addProducts(Products(
             Category: selectedValue,
             //id: uuid.v4(),
-
   */
   save() async {
     setState(() {
@@ -255,9 +254,6 @@ save() async {
         setState(() {
            setState(() {
       isSaving = false;
-      imageUrls.clear();
-      images.clear();
-      clearFields();
       ScaffoldMessenger.of(context)
       .showSnackBar(SnackBar(content: Text("ADDED SUCCESSFULLY")));
       //ScaffoldMessenger.of(context).showSnackBar(snackBar(context : Text("f;ldjf")));
@@ -274,12 +270,7 @@ save() async {
    // });
   }
 
-clearFields() {
-  setState(() {
-    selctedValue = "";
-    productNameC.clear();
-  });
-}
+
 
   pickImage() async {
     final List<XFile>? pickImage = await imagePicker.pickMultiImage();
@@ -315,4 +306,6 @@ uploadImages() async {
       await postImages(image).then((downLoadUrl) => imageUrls.add(downLoadUrl));
     }
   }
+
+
 }
