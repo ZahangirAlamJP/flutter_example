@@ -6,8 +6,9 @@ import 'package:flutter_example/screen/web_side/updateProducts_screen.dart';
 
 import 'deshboard_screen.dart';
 
+
 class WebMainScreen extends StatefulWidget {
-  //const WebMainScreen({ Key? key }) : super(key: key);
+  // const WebMainScreen({Key? key}) : super(key: key);
   static const String id = "webmain";
 
   @override
@@ -15,28 +16,28 @@ class WebMainScreen extends StatefulWidget {
 }
 
 class _WebMainScreenState extends State<WebMainScreen> {
-  Widget selectedScreen =const  DashBoardScreen();
+  Widget selectedSCreen = DashBoardScreen();
 
-chooseScreens(item) {
+  chooseScreens(item) {
     switch (item.route) {
       case DashBoardScreen.id:
         setState(() {
-          selectedScreen = DashBoardScreen();
+          selectedSCreen = DashBoardScreen();
         });
         break;
       case AddProductScreen.id:
         setState(() {
-          selectedScreen = AddProductScreen();
+          selectedSCreen = AddProductScreen();
         });
         break;
       case UpdateProductScreen.id:
         setState(() {
-          selectedScreen = UpdateProductScreen();
+          selectedSCreen = UpdateProductScreen();
         });
         break;
       case DeleteProductScreen.id:
         setState(() {
-          selectedScreen = DeleteProductScreen();
+          selectedSCreen = DeleteProductScreen();
         });
         break;
       default:
@@ -56,9 +57,7 @@ chooseScreens(item) {
             onSelected: (item) {
               chooseScreens(item);
             },
-
-
-               items: const [
+            items: const [
               MenuItem(
                 title: "DASHBOARD",
                 icon: Icons.dashboard,
@@ -84,8 +83,8 @@ chooseScreens(item) {
                 icon: Icons.shop,
               ),
             ],
-        selectedRoute: WebMainScreen.id),
-      body: selectedScreen,
-      );
+            selectedRoute: WebMainScreen.id),
+        body: selectedSCreen);
   }
 }
+

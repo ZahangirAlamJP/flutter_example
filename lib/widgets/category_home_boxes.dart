@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -38,7 +37,6 @@ class CategoryHomeBoxes extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: Colors.red,
                 ///colors: red.withOpacity(0.4),
-
            //     color: Colors.primaries[Random().nextInt(categories.length)],
               ),
             ),
@@ -49,6 +47,3 @@ class CategoryHomeBoxes extends StatelessWidget {
     );
   }
 }
-
-
-// carousel slider

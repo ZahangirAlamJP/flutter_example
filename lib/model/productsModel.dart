@@ -7,71 +7,73 @@ class Products {
   String? id;
   String? productName;
   String? detail;
+  String? brand;
   int? price;
   int? discountPrice;
   String? serialCode;
-
   List<dynamic>? imageUrls;
-  bool? isOnsale;
+  bool? isSale;
   bool? isPopular;
   bool? isFavourite;
 
-Products({
-required  this.id, 
-required  this.productName, 
-required  this.detail, 
-required  this.category, 
-required  this.price,
-required  this.discountPrice, 
-required  this.serialCode, 
-required  this.imageUrls, 
-required  this.isOnsale, 
-required  this.isPopular, 
-required  this.isFavourite
+  Products({
+    required this.category,
+    required this.id,
+    required this.productName,
+    required this.detail,
+    required this.price,
+    required this.brand,
+    required this.discountPrice,
+    required this.serialCode,
+    required this.imageUrls,
+    required this.isSale,
+    required this.isPopular,
+    required this.isFavourite,
+  });
 
-});
 
-
-static Future<void> addProducts(Products products) async{
-  CollectionReference db = FirebaseFirestore.instance.collection("products");
-  Map<String, dynamic> data = {
-    "category" : products.category,
-    "productName" : products.productName,
-    "id" : products.id,
-    "detail" : products.detail,
-    "price" : products.price,
-    "discountPrice" : products.discountPrice,
-    "serialCode" : products.serialCode,
-    "imageUrls" : products.imageUrls,
-    "isOnsale" : products.isOnsale,
-     "isPopular": products.isPopular,
-    "isFavourite" : products.isFavourite,
-
-  };
-  await db.add(data);
-}
+ static Future<void> addProducts(Products products) async {
+    CollectionReference db = FirebaseFirestore.instance.collection("products");
+    Map<String, dynamic> data = {
+      "category": products.category,
+      "productName": products.productName,
+      "id": products.id,
+      "detail": products.detail,
+      "price": products.price,
+      "brand": products.brand,
+      "discountPrice": products.discountPrice,
+      "serialCode": products.serialCode,
+      "imageUrls": products.imageUrls,
+      "isOnSale": products.isSale,
+      "isPopular": products.isPopular,
+      "isFavourite": products.isFavourite,
+    };
+    await db.add(data);
+  }
 //////////////////////////////
-static Future<void> UpdateProducts(String id, Products UpdateProducts) async{
+  static Future<void> updateProducts(String id, Products updateProducts) async {
     CollectionReference db = FirebaseFirestore.instance.collection("products");
-  Map<String, dynamic> data = {
-    "category" : UpdateProducts.category,
-    "productName" : UpdateProducts.productName,
-    "id" : UpdateProducts.id,
-    "detail" : UpdateProducts.detail,
-    "price" : UpdateProducts.price,
-    "discountPrice" : UpdateProducts.discountPrice,
-    "serialCode" : UpdateProducts.serialCode,
-    "imageUrls" :UpdateProducts.imageUrls,
-    "isOnsale" : UpdateProducts.isOnsale,
-    
-    "isFavourite" : UpdateProducts.isFavourite,
 
-  };
-  await db.doc(id).update(data);
-}
-//////////////////////////
-static Future<void> deleteProducts(String id)async{
+    Map<String, dynamic> data = {
+      "category": updateProducts.category,
+      "productName": updateProducts.productName,
+      "id": updateProducts.id,
+      "detail": updateProducts.detail,
+      "price": updateProducts.price,
+      "brand": updateProducts.brand,
+      "discountPrice": updateProducts.discountPrice,
+      "serialCode": updateProducts.serialCode,
+      "imageUrls": updateProducts.imageUrls,
+      "isOnSale": updateProducts.isSale,
+      "isPopular": updateProducts.isPopular,
+      "isFavourite": updateProducts.isFavourite,
+    };
+    await db.doc(id).update(data);
+  }
+
+  static Future<void> deleteProduct(String id) async {
     CollectionReference db = FirebaseFirestore.instance.collection("products");
-  await db.doc(id).delete();
-}
+
+    await db.doc(id).delete();
+  }
 }
