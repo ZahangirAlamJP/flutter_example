@@ -8,7 +8,6 @@ import 'package:flutter_example/screens/web_side/addProducts_screen.dart';
 import 'package:flutter_example/screens/web_side/dashboard_screen.dart';
 import 'package:flutter_example/screens/web_side/deleteProducts_screen.dart';
 import 'package:flutter_example/screens/web_side/updateProduct_screen.dart';
-import 'package:flutter_example/screens/web_side/update_complete_screen.dart';
 import 'package:flutter_example/screens/web_side/web_login.dart';
 import 'package:flutter_example/screens/web_side/web_main.dart';
 import 'package:sizer/sizer.dart';
@@ -17,13 +16,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
     await Firebase.initializeApp(
-        options: const FirebaseOptions(
-            apiKey: "AIzaSyCCiwQMiTsDyiOlFlNhxEKhBEkCKfp2fio",
-            authDomain: "eco-buy.firebaseapp.com",
-            projectId: "eco-buy",
-            storageBucket: "eco-buy.appspot.com",
-            messagingSenderId: "400546493929",
-            appId: "1:400546493929:web:b33e3d8f9b51d9cbf0c778"));
+         options: const FirebaseOptions(
+    apiKey: "AIzaSyBjItvcyUJ3BmVVVAe5mO0LdlTIMSGRtD8",
+    authDomain: "example-f9a3b.firebaseapp.com",
+    projectId: "example-f9a3b",
+    storageBucket: "example-f9a3b.appspot.com",
+    messagingSenderId: "34232398125",
+    appId: "1:34232398125:web:fa64ba6840e0e08c3523a4",
+        ));
+
+
+  
   } else {
     await Firebase.initializeApp();
   }
@@ -54,8 +57,8 @@ class MyApp extends StatelessWidget {
           UpdateProductScreen.id: (context) => UpdateProductScreen(),
           DeleteProductScreen.id: (context) => DeleteProductScreen(),
           DashBoardScreen.id: (context) => DashBoardScreen(),
-          UpdateCompleteProductScreen.id: (context) =>
-              UpdateCompleteProductScreen(),
+          // UpdateCompleteProductScreen.id: (context) =>
+          //     UpdateCompleteProductScreen(),
         },
       ),
     );
