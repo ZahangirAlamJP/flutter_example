@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_example/screens/layout_screen.dart';
+import 'package:flutter_example/screens/landing_screen.dart';
 import 'package:flutter_example/screens/web_side/addProducts_screen.dart';
 import 'package:flutter_example/screens/web_side/dashboard_screen.dart';
 import 'package:flutter_example/screens/web_side/deleteProducts_screen.dart';
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           backgroundColor: Colors.white,
         ),
-        home: LayoutScreen(),
+        home: LandingScreen(),
         routes: {
           WebLoginScreen.id: (context) => WebLoginScreen(),
           WebMainScreen.id: (context) => WebMainScreen(),

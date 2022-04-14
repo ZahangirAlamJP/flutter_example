@@ -71,7 +71,8 @@ class UpdateProductScreen extends StatelessWidget {
                                                 MaterialPageRoute(builder: (_) {
                                               return UpdateCompleteScreen(
                                                 id: data[index].id,
-                                                products: Products(
+                                                products: 
+                                                Products(
                                                   brand: data[index]["brand"],
                                                   category: data[index]
                                                       ["category"],

@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_example/screens/home_screen.dart';
-import 'package:flutter_example/screens/login_screen.dart';
+import 'package:flutter_example/screens/bottom_page.dart';
+import 'package:flutter_example/screens/bottom_screens/home_screen.dart';
+import 'package:flutter_example/screens/auth_screens/login_screen.dart';
 import 'package:flutter_example/utils/styles.dart';
+
 
 class LandingScreen extends StatelessWidget {
   // LandingScreen({Key? key}) : super(key: key);
@@ -37,7 +39,7 @@ class LandingScreen extends StatelessWidget {
                 if (user == null) {
                   return LoginScreen();
                 } else {
-                  return HomeScreen();
+                  return BottomPage();
                 }
               }
               return Scaffold(
