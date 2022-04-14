@@ -1,14 +1,12 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_example/screen/web_side/web_main.dart';
+import 'package:flutter_example/screens/web_side/web_main.dart';
 import 'package:flutter_example/services/firebase_services.dart';
 import 'package:flutter_example/utils/styles.dart';
-import 'package:flutter_example/widgets/ecoTextField.dart';
 import 'package:flutter_example/widgets/eco_button.dart';
-import 'package:flutter_example/widgets/eco_dialoge.dart';
+import 'package:flutter_example/widgets/eco_dialogue.dart';
+import 'package:flutter_example/widgets/ecotextfield.dart';
 import 'package:sizer/sizer.dart';
-
 
 class WebLoginScreen extends StatefulWidget {
   static const String id = "weblogin";

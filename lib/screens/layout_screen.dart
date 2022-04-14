@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_example/screen/landing_screen.dart';
-import 'package:flutter_example/screen/web_side/web_login.dart';
-import 'package:flutter_example/screen/web_side/web_main.dart';
+import 'package:flutter_example/screens/landing_screen.dart';
+import 'package:flutter_example/screens/web_side/web_login.dart';
 
 class LayoutScreen extends StatelessWidget {
   const LayoutScreen({Key? key}) : super(key: key);
@@ -12,7 +10,7 @@ class LayoutScreen extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.minWidth > 600) {
-          return WebMainScreen();
+          return WebLoginScreen();
         } else {
           return LandingScreen();
         }

@@ -5,28 +5,26 @@ class Products {
   String? id;
   String? productName;
   String? detail;
-  String? brand;
   int? price;
   int? discountPrice;
   String? serialCode;
-  List<dynamic>? imageUrls;
+  List<String>? imageUrls;
   bool? isSale;
   bool? isPopular;
   bool? isFavourite;
 
   Products({
-    this.category,
-    this.id,
-    this.productName,
-    this.detail,
-    this.price,
-    this.brand,
-    this.discountPrice,
-    this.serialCode,
-    this.imageUrls,
-    this.isSale,
-    this.isPopular,
-    this.isFavourite,
+    required this.category,
+    required this.id,
+    required this.productName,
+    required this.detail,
+    required this.price,
+    required this.discountPrice,
+    required this.serialCode,
+    required this.imageUrls,
+    required this.isSale,
+    required this.isPopular,
+    required this.isFavourite,
   });
 
   static Future<void> addProducts(Products products) async {
@@ -37,7 +35,6 @@ class Products {
       "id": products.id,
       "detail": products.detail,
       "price": products.price,
-      "brand": products.brand,
       "discountPrice": products.discountPrice,
       "serialCode": products.serialCode,
       "imageUrls": products.imageUrls,
@@ -48,7 +45,7 @@ class Products {
     await db.add(data);
   }
 
-  static Future<void> updateProducts(String id, Products updateProducts) async {
+  Future<void> updateProducts(String id, Products updateProducts) async {
     CollectionReference db = FirebaseFirestore.instance.collection("products");
 
     Map<String, dynamic> data = {
@@ -57,7 +54,6 @@ class Products {
       "id": updateProducts.id,
       "detail": updateProducts.detail,
       "price": updateProducts.price,
-      "brand": updateProducts.brand,
       "discountPrice": updateProducts.discountPrice,
       "serialCode": updateProducts.serialCode,
       "imageUrls": updateProducts.imageUrls,
@@ -68,7 +64,7 @@ class Products {
     await db.doc(id).update(data);
   }
 
-  static Future<void> deleteProduct(String id) async {
+  Future<void> deleteProduct(String id) async {
     CollectionReference db = FirebaseFirestore.instance.collection("products");
 
     await db.doc(id).delete();

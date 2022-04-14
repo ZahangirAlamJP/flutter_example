@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
-import 'package:flutter_example/screen/web_side/addproducts_screen.dart';
-import 'package:flutter_example/screen/web_side/deleteProducts_screen.dart';
-import 'package:flutter_example/screen/web_side/updateProducts_screen.dart';
-
-import 'deshboard_screen.dart';
-
+import 'package:flutter_example/screens/web_side/addProducts_screen.dart';
+import 'package:flutter_example/screens/web_side/dashboard_screen.dart';
+import 'package:flutter_example/screens/web_side/deleteProducts_screen.dart';
+import 'package:flutter_example/screens/web_side/updateProduct_screen.dart';
 
 class WebMainScreen extends StatefulWidget {
   // const WebMainScreen({Key? key}) : super(key: key);
@@ -87,5 +85,3 @@ class _WebMainScreenState extends State<WebMainScreen> {
         body: selectedSCreen);
   }
 }
-
-
